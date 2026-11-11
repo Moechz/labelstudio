@@ -1,0 +1,97 @@
+{
+  "app_id": "labelstudiodocker",
+  "title": "label-studio",
+  "image": "heartexlabs/label-studio:1.23.0",
+  "repo_name": "labelstudio",
+  "mode": "plain",
+  "container_port": 8080,
+  "category": [
+    "Artificial_Intelligence"
+  ],
+  "volumes": [
+    {
+      "host": "/Volume1/DockerAppData/labelstudiodocker/data",
+      "container": "/label-studio/data"
+    }
+  ],
+  "env": {
+    "TZ": "Asia/Shanghai"
+  },
+  "auth": "HumanSignal",
+  "upstream_url": "https://github.com/HumanSignal/label-studio",
+  "upstream_license": "Apache-2.0",
+  "descript": "Label Studio is a multi-type data labeling and annotation tool with standardized output format. Packaged for TerraMaster TOS 7: the official Docker Hub image runs as a container on your NAS, keeps its data in the application data folder (so it survives restarts and updates), and is opened from its desktop icon.",
+  "release_note": "1. First release.",
+  "important": "First run: open the web UI and complete the initial setup. Data lives in /Volume1/DockerAppData/labelstudiodocker/ and survives restarts and updates. The container runs as uid 1000, so mounted folders must be readable by that user. Needs DockerEngine; configure a registry mirror if Docker Hub is unreachable. Back up the application data folder before uninstalling with data removal. Plain HTTP on the LAN.",
+  "probe": {
+    "user_in_image": "1001",
+    "entrypoint": [
+      "./deploy/docker-entrypoint.sh"
+    ],
+    "cmd": [
+      "label-studio"
+    ],
+    "exposed_ports": [
+      8080
+    ],
+    "declared_volumes": [],
+    "image_healthcheck": [],
+    "digest": "heartexlabs/label-studio@sha256:aa461572e8f9d86a1bf9520c1db620204e86160fd2f80dd7e9d40ac84a8828ea",
+    "architecture": "x86_64",
+    "platforms": [],
+    "http_client_in_image": "curl",
+    "trial_run": {
+      "ok": false,
+      "http_code": "",
+      "state": "exited",
+      "paths": [],
+      "host_port": 18000,
+      "log_tail": "./deploy/docker-entrypoint.sh: Looking for init scripts in /label-studio/deploy/docker-entrypoint.d/app-docker/\n./deploy/docker-entrypoint.sh: Launching /label-studio/deploy/docker-entrypoint.d/app-docker/05-check-data-permissions.sh\n=> Checking data directory permissions: /label-studio/data\nERROR: Data directory is not writable: /label-studio/data\n-----------------------------------------------------\nCurrent user:\n  UID        = 1000\n  GID        = 1000\n\nDirectory owner and permissions:\ndrwxr-xr-x    1 1001     root             0 Mar 11  2026 /label-studio/data\n\nTo resolve this issue:\n  - On the Docker host, ensure the user running the container has write access to the mount volume.\n  - If you are mounting a host directory as -v mydata:/label-studio/data:\n      rm -rf mydata\n      mkdir -p mydata\n      sudo chown :0 mydata\n\nRefer to the documentation for more details:\n  https://labelstud.io/guide/install_troubleshoot.html#File-permissions-for-non-root-user",
+      "files_in_mounts": ""
+    },
+    "docker_hub": {},
+    "github": {
+      "owner": "HumanSignal",
+      "repo": "label-studio",
+      "description": "Label Studio is a multi-type data labeling and annotation tool with standardized output format",
+      "license": "Apache-2.0",
+      "homepage": "https://labelstud.io"
+    }
+  },
+  "healthcheck": [
+    "CMD-SHELL",
+    "curl -fsS http://127.0.0.1:8080/health >/dev/null || exit 1"
+  ],
+  "entrypoint_file": "src/entrypoint.sh",
+  "platform": "x86_64",
+  "user": "1000:1000",
+  "publisher": "Moechz",
+  "compose_project": "labelstudiodocker",
+  "github_repo": "labelstudio",
+  "upstream_version": "1.23.0",
+  "release_tag_prefix": "v",
+  "version": "1.23.0-1",
+  "help": "https://github.com/Moechz/labelstudio/issues",
+  "official": "https://github.com/HumanSignal/label-studio",
+  "license": "Apache-2.0",
+  "docker_socket": false,
+  "group_add": [],
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "translations": {
+    "zh-cn": {
+      "descript": "数据标注平台，支持文本、图像、音频标注。",
+      "important": "首次使用请打开网页完成初始化。数据保存在 DockerAppData/labelstudiodocker，重启和升级不会丢失。容器以 uid 1000 运行，挂载目录需对该用户可读。需要 DockerEngine；Docker Hub 不可达时先配置镜像加速。卸载并删除数据前请备份。局域网内为 HTTP。"
+    },
+    "zh-hk": {
+      "descript": "数据标注平台，支持文本、图像、音频标注。",
+      "important": "首次使用請開啟網頁完成初始化。資料保存在 DockerAppData/labelstudiodocker，重新啟動和升級不會遺失。容器以 uid 1000 運行，掛載目錄需對該使用者可讀。需要 DockerEngine；Docker Hub 不可達時先設定鏡像加速。解除安裝並刪除資料前請備份。區域網路內為 HTTP。"
+    }
+  },
+  "healthcheck_start_period": "180s",
+  "healthcheck_interval": "30s",
+  "healthcheck_retries": 10,
+  "host_port": 8077
+}

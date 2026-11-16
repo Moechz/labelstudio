@@ -70,7 +70,7 @@
   "github_repo": "labelstudio",
   "upstream_version": "1.23.0",
   "release_tag_prefix": "v",
-  "version": "1.23.0-2",
+  "version": "1.23.0-3",
   "help": "https://github.com/Moechz/labelstudio/issues",
   "official": "https://github.com/HumanSignal/label-studio",
   "license": "Apache-2.0",
